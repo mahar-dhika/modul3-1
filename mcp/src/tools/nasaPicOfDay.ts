@@ -1,4 +1,4 @@
-import { createTool } from "@mastra/core/tools";Add commentMore actions
+import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
 import axios from "axios";
 
@@ -11,7 +11,7 @@ export async function fetchNasaPicOfDay(
   try {
     const response = await axios.get(
       `https://api.nasa.gov/planetary/apod?api_key=${apiKey}${
-        date ? &date=${date} : ""
+        date ? `&date=${date}` : ""
       }`
     );
     return {
@@ -24,7 +24,7 @@ export async function fetchNasaPicOfDay(
   } catch (error: unknown) {
     if (error instanceof Error) {
       throw new Error(
-        Failed to fetch NASA picture of the day: ${error.message}
+        `Failed to fetch NASA picture of the day: ${error.message}`
       );
     }
     throw new Error("Failed to fetch NASA picture of the day");
@@ -46,6 +46,6 @@ export const nasaPicOfDayTool = createTool({
     if (!NASA_API_KEY) {
       throw new Error("NASA API key is not set");
     }
-    return fetchNasaPicOfDay(date, NASA_API_KEY);Add commentMore actions
+    return fetchNasaPicOfDay(date, NASA_API_KEY);
   },
 });
